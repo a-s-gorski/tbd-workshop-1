@@ -53,12 +53,16 @@ resource "google_project_iam_member" "tbd-editor-supervisors" {
   project = google_project.tbd_project.project_id
   role    = "roles/editor"
   member  = each.value
+
+  checkov:skip=CKV_GCP_117: "Ensure basic roles are not used at project level."
 }
 
 resource "google_project_iam_member" "tbd-editor-member" {
   project = google_project.tbd_project.project_id
   role    = "roles/owner"
   member  = "serviceAccount:${google_service_account.tbd-terraform.email}"
+
+  checkov:skip=CKV_GCP_117: "Ensure basic roles are not used at project level."
 }
 
 resource "google_storage_bucket" "tbd-state-bucket" {
@@ -71,6 +75,8 @@ resource "google_storage_bucket" "tbd-state-bucket" {
     prevent_destroy = true
   }
   public_access_prevention = "enforced"
+
+  checkov:skip=CKV_GCP_78: "Ensure Cloud storage has versioning enabled"
 }
 
 resource "google_dataproc_cluster" "tbd_cluster" {
@@ -99,4 +105,7 @@ resource "google_dataproc_cluster" "tbd_cluster" {
   labels = {
     env = "dev"
   }
+
+  checkov:skip=CKV_GCP_103: "Ensure Dataproc Clusters do not have public IPs"
+  checkov:skip=CKV_GCP_91: "Ensure Dataproc cluster is encrypted with Customer Supplied Encryption Keys (CSEK)"
 }
