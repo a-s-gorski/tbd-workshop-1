@@ -29,5 +29,4 @@ in profiles.yml.
 
 5. Analyze the performance and scalability of execution times of each model. Visualize and discucss the final results.
 
-
-   
+We introduced the described modifications to the code, but we were unable to perform the analysis due to a problem with the last step of phase2a.
