@@ -174,4 +174,6 @@ There has been 17 tables created.
 
 ![2a_12_1.png](doc/figures/2a_12_1.png)
 ![2a_12_2.png](doc/figures/2a_12_2.png)
-Analizując logi (również w Airflow) doszliśmy do wniosku, że występuje problem z limitami pamięci. Po wielu próbach nie udało nam się go rozwiązać. Próbowaliśmy zmiany typu maszyny oraz limitów pamięci.
+Analyzing the logs (including in Airflow), we concluded that there is a problem with memory limits. Despite many attempts, we were unable to resolve it. We tried changing the machine type and memory limits.
+
+However, we were the first team to solve the problem that occurred during release at the beginning of task 2a. Thanks to this, other teams could solve the problem using our recommendations. After analyzing the logs and tracking CPU and SSD usage, we noticed that the problem was with qoutas. The problem was that the cluster tried to autoscale but couldn't due to upper limits, so after a few failed attempts it deleted itself and healthchecks had no way to reach the required pods.
