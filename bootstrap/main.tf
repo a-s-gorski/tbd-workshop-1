@@ -100,31 +100,3 @@ resource "google_dataproc_cluster" "tbd_cluster" {
     env = "dev"
   }
 }
-
-checkov:skip=CKV_GCP_91: "Ensure Dataproc cluster is encrypted with Customer Supplied Encryption Keys (CSEK)"
-checkov:skip=CKV_GCP_103: "Ensure Dataproc Clusters do not have public IPs"
-checkov:skip=CKV_GCP_117: "Ensure basic roles are not used at project level."
-
-
-resource "google_dataproc_job" "example_pyspark" {
-  project = google_project.tbd_project.project_id
-  region  = var.region
-
-  pyspark_config {
-    main_python_file_uri = "gs://path-to-your-pyspark-job.py"
-
-    properties = {
-      "spark.executor.memory"          = "4g"   # Increased to fit within new YARN settings
-      "spark.executor.memoryOverhead"  = "512m"
-      "spark.executor.cores"           = "1"
-      "spark.driver.memory"            = "4g"
-      "spark.driver.memoryOverhead"    = "512m"
-      "spark.dynamicAllocation.enabled" = "true"
-      "spark.dynamicAllocation.minExecutors" = "1"
-      "spark.dynamicAllocation.maxExecutors" = "4"
-    }
-  }
-
-  cluster = google_dataproc_cluster.tbd_cluster.name
-}
-

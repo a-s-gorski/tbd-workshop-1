@@ -18,7 +18,11 @@ Worth to read:
 
 2. Authors:
 
-   7
+* Zuzanna Górecka
+* Adam Górski
+* Michał Oracki
+
+   Zespół nr 7
 
    [***Link to forked repo***](https://github.com/a-s-gorski/tbd-workshop-1)
 
@@ -168,4 +172,6 @@ There has been 17 tables created.
 
 12. Redeploy infrastructure and check if the DAG finished with no errors:
 
-***The screenshot of Apache Aiflow UI***
+![2a_12_1.png](doc/figures/2a_12_1.png)
+![2a_12_2.png](doc/figures/2a_12_2.png)
+Analizując logi (również w Airflow) doszliśmy do wniosku, że występuje problem z limitami pamięci. Po wielu próbach nie udało nam się go rozwiązać. Próbowaliśmy zmiany typu maszyny oraz limitów pamięci.
